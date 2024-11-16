@@ -20,7 +20,7 @@ class ChatClient:
         
         # Background image
         self.background_label = Label(self.root)
-        self.set_background_image("assets/background.jpg")
+        self.set_background_image("assets/background.jpg")  # Ensure correct path
         self.background_label.place(relwidth=1, relheight=1)
         
         # Chat display
@@ -46,11 +46,12 @@ class ChatClient:
 
     def set_background_image(self, image_path):
         try:
+            # Load the image
             bg_image = PhotoImage(file=image_path)
             self.background_label.config(image=bg_image)
             self.background_label.image = bg_image  # Keep reference to prevent garbage collection
-        except:
-            print("Error loading background image.")
+        except Exception as e:
+            print(f"Error loading background image: {e}")
 
     def change_background(self):
         file_path = filedialog.askopenfilename(filetypes=[("Image Files", "*.png;*.jpg;*.jpeg")])
